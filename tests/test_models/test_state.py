@@ -13,7 +13,7 @@ class TestState(unittest.TestCase):
 
     def test_classexists(self):
         """ tests whether the class exits """
-        self.asserEqual(str(type(self.s), "<class 'models.state.State'>"))
+        self.asserEqual(str(type(self.s)), "<class 'models.state.State'>")
 
     def test_stateinehritance(self):
         """ tests whether State is a sublcass of BaseModel """
