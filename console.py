@@ -65,7 +65,7 @@ class HBNBCommand(cmd.Cmd):
 
         if args[0] not in HBNBCommand.class_list:
             print("** class doesn't exist **")
-        
+
         elif len(args) == 1:
             print("** instance id missing **")
             all_objs = storage.all()
@@ -75,6 +75,51 @@ class HBNBCommand(cmd.Cmd):
                 if obj_name == args[0] and obj_id == args[1].strip('"'):
                     del value
                     del storage._FileStorage__objects[key]
+                    storage.save()
+                    return
+            print("** no instance found **")
+
+    def do_all(self, arg):
+        """ Prints all string representation of all instances based or not on
+        the class name """
+
+        args = arg.split(' ')
+
+        instance_list = []
+        if args[0] not in HBNBCommand.class_list:
+            print("** class doesn't exist **")
+            all_objs = storage.all()
+            for key, value in all_objs.items():
+                obj_name = value.__class__.__name__
+                if obj_name == args[0]:
+                    instance_list.append(value.__str__())
+            print(instance_list)
+
+    def do_update(self, arg):
+        """ Updates an instance based on the class name and id by adding or
+        updating attribute (save the change into the JSON file) """
+
+        if not arg:
+            print("** class name missing **")
+            return
+
+        args = arg.split(' ')
+
+        if args[0] not in HBNBCommand.class_list:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        elif len(args) == 2:
+            print("** attribute name missing **")
+        elif len(args) == 3:
+            print("** value missing **")
+        else:
+            all_objs = storage.all()
+            for key, value in all_onjs.items():
+                obj_name = value.__class__.name__
+                obj_id = value.id
+                if obj_name == args[0] and obj_id == args[1].strip('"'):
+                    setattr(value, args[2], args[3])
                     storage.save()
                     return
             print("** no instance found **")
