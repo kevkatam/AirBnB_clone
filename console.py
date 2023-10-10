@@ -5,13 +5,14 @@ entry point of the command interpreter
 import cmd
 """from models.base_model import BaseModel
 from models import storage"""
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
     """ Command interpreter """
     prompt = "(hbnb) "
-    class_list = ['BaseModel']
-    command_list = ['create']
+    class_list = ['BaseModel', 'User']
+    command_list = ['create', 'show', 'destroy', 'all', 'update']
 
     def help_help(self):
         """ prints help command description """
