@@ -55,6 +55,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
+        else:
             all_objs = storage.all()
             for key, value in all_objs.items():
                 obj_name = value.__class__.__name__
@@ -77,6 +78,7 @@ class HBNBCommand(cmd.Cmd):
 
         elif len(args) == 1:
             print("** instance id missing **")
+        else:
             all_objs = storage.all()
             for key, value in all_objs.items():
                 obj_name = value.__class__.__name__
@@ -97,6 +99,7 @@ class HBNBCommand(cmd.Cmd):
         instance_list = []
         if args[0] not in HBNBCommand.class_list:
             print("** class doesn't exist **")
+        else:
             all_objs = storage.all()
             for key, value in all_objs.items():
                 obj_name = value.__class__.__name__
