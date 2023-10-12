@@ -122,8 +122,8 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
         else:
             all_objs = storage.all()
-            for key, value in all_onjs.items():
-                obj_name = value.__class__.name__
+            for key, value in all_objs.items():
+                obj_name = value.__class__.__name__
                 obj_id = value.id
                 if obj_name == args[0] and obj_id == args[1].strip('"'):
                     setattr(value, args[2], args[3])
