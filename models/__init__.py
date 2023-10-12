@@ -2,7 +2,7 @@
 '''Create FileStorage instance'''
 
 
-from models.engine import file_storage
+from models.engine.file_storage import FileStorage 
 
-storage = file_storage.FileStorage()
+storage = FileStorage()
 storage.reload()

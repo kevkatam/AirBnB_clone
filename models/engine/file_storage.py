@@ -21,19 +21,32 @@ class FileStorage:
 
         class_name = type(obj).__name__
         o_id = str(obj.id)
-        FileStorage.__objects['{class_name}.{o_id}'] = obj
+        FileStorage.__objects[f'{class_name}.{o_id}'] = obj
 
     def save(self):
         '''Serialize to JSON'''
+        d = {}
+        for k, v in FileStorage.__objects.items():
+            d[k] = v.to_dict()
 
         with open(FileStorage.__file_path, 'w', encoding='utf-8') as f:
-            json.dump(FileStorage.__objects, f)
+            json.dump(d, f)
 
     def reload(self):
         '''Deserialize from JSON'''
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
+        
+        d = {'BaseModel': BaseModel, 'User': User, 'State': State,
+             'City': City, 'Amenity': Amenity, 'Place': Place,
+             'Review': Review}
 
-        if os.path.exists(FileStorage.__file_path):
+        if os.path.exists(FileStorage.__file_path) is True:
             with open(FileStorage.__file_path, 'r', encoding='utf-8') as f:
-                FileStorage.__objects = json.load(f)
-        else:
-            pass
+                for k, v in json.load(f).items():
+                    self.new(d[v['__class__']](**v))
