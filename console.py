@@ -11,6 +11,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -36,8 +37,9 @@ class HBNBCommand(cmd.Cmd):
         elif model not in HBNBCommand.class_list:
             print("** class doesn't exist **")
         else:
-            dct = {'BaseModel': BaseModel}
-            mymodel = dct[model]()
+            d = {'BaseModel': BaseModel, 'User': User, 'City': City,
+                   'Amenity': Amenity, 'Place': Place, 'Review': Review}
+            mymodel = d[model]()
             print(mymodel.id)
             mymodel.save()
 
