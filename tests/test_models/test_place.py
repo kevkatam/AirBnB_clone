@@ -4,6 +4,7 @@ unittest for the module place
 """
 import unittest
 from models.place import Place
+import datetime
 
 
 class TestPlace(unittest.TestCase):
@@ -31,6 +32,9 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(hasattr(self.p, 'latitude'))
         self.assertTrue(hasattr(self.p, 'longitude'))
         self.assertTrue(hasattr(self.p, 'amenity_ids'))
+        self.assertTrue(hasattr(self.p, 'id'))
+        self.assertTrue(hasattr(self.p, 'created_at'))
+        self.assertTrue(hasattr(self.p, 'updated_at'))
 
     def test_types(self):
         """ tests whether the type of the attributes is correct """
@@ -45,6 +49,9 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(self.p.latitude, float)
         self.assertIsInstance(self.p.longitude, float)
         self.assertIsInstance(self.p.amenity_ids, list)
+        self.assertIsInstance(self.p.id, str)
+        self.assertIsInstance(self.p.created_at, datetime.datetime)
+        self.assertIsInstance(self.p.updated_at, datetime.datetime)
 
 
 if __name__ == '__main__':
