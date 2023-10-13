@@ -5,6 +5,7 @@
 import json
 import os.path
 
+
 class FileStorage:
     '''Persistent file storage'''
 
@@ -41,7 +42,7 @@ class FileStorage:
         from models.amenity import Amenity
         from models.place import Place
         from models.review import Review
-        
+
         d = {'BaseModel': BaseModel, 'User': User, 'State': State,
              'City': City, 'Amenity': Amenity, 'Place': Place,
              'Review': Review}
