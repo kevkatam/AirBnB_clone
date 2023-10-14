@@ -17,7 +17,12 @@ class BaseModel:
                 if key == '__class__':
                     continue
                 if key == 'created_at' or key == 'updated_at':
+<<<<<<< HEAD
                     value = datetime.fromisoformat(value)
+=======
+                    value = datetime.strptime(kwargs[key],
+                                              "%Y-%m-%dT%H:%M:%S.%f")
+>>>>>>> 34baaa4ff68929ba0173ed1467bd180d6fecc602
 
                 setattr(self, key, value)
         else:
@@ -39,10 +44,19 @@ class BaseModel:
 
     def to_dict(self):
         '''Returns a dictionary'''
+<<<<<<< HEAD
 
         dictionary = self.__dict__
+=======
+        dictionary = {}
+        for k, v in self.__dict__.items():
+            if k == "created_at" or k == "updated_at":
+                dictionary[k] = v.strftime("%Y-%m-%dT%H:%M:%S.%f")
+            else:
+                if not v:
+                    pass
+                else:
+                    dictionary[k] = v
+>>>>>>> 34baaa4ff68929ba0173ed1467bd180d6fecc602
         dictionary['__class__'] = self.__class__.__name__
-        dictionary['created_at'] = self.created_at.isoformat()
-        dictionary['updated_at'] = self.updated_at.isoformat()
-
         return dictionary

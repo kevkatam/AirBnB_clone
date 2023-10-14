@@ -3,6 +3,7 @@
 unittests fro module user.py
 """
 import unittest
+import datetime
 from models.user import User
 
 
@@ -24,6 +25,9 @@ class TestUser(unittest.TestCase):
         self.assertTrue(hasattr(self.u, 'first_name'))
         self.assertTrue(hasattr(self.u, 'last_name'))
         self.assertTrue(hasattr(self.u, 'password'))
+        self.assertTrue(hasattr(self.u, 'id'))
+        self.assertTrue(hasattr(self.u, 'created_at'))
+        self.assertTrue(hasattr(self.u, 'updated_at'))
 
     def test_types(self):
         """ test if attribute type is correct """
@@ -31,6 +35,9 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(self.u.first_name, str)
         self.assertIsInstance(self.u.last_name, str)
         self.assertIsInstance(self.u.password, str)
+        self.assertIsInstance(self.u.id, str)
+        self.assertIsInstance(self.u.created_at, datetime.datetime)
+        self.assertIsInstance(self.u.updated_at, datetime.datetime)
 
 
 if __name__ == '__main__':

@@ -11,14 +11,35 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+import json
 
 
 class HBNBCommand(cmd.Cmd):
     """ Command interpreter """
     prompt = "(hbnb) "
-    class_list = ['BaseModel', 'User', 'State', 'City', 'Amenity',
-                  'Place', 'Review']
-    command_list = ['create', 'show', 'destroy', 'all', 'update']
+    cls_list = ['BaseModel', 'User', 'State', 'City', 'Amenity',
+                'Place', 'Review']
+    cmd_list = ['create', 'show', 'destroy', 'all', 'update', 'count']
+
+    def precmd(self, arg):
+        """ modifies the parsed argument """
+        if '.' in arg and '(' and ')' in arg:
+            c = arg.split('.')
+            cmd = c[1].split('(')
+            args = cmd[1].split(')')
+            if c[0] in HBNBCommand.cls_list and cmd[0] in HBNBCommand.cmd_list:
+                arg = cmd[0] + ' ' + c[0] + ' ' + args[0]
+        return (arg)
+
+    def do_count(self, class_name):
+        """ retrieve the number of instances of a class """
+        count = 0
+        all_objs = storage.all()
+        for key, value in all_objs.items():
+            c = key.split('.')
+            if c[0] == class_name:
+                count += 1
+        print(count)
 
     def help_help(self):
         """ prints help command description """
@@ -33,11 +54,12 @@ class HBNBCommand(cmd.Cmd):
         and prints the id """
         if not model:
             print("** class name missing **")
-        elif model not in HBNBCommand.class_list:
+        elif model not in HBNBCommand.cls_list:
             print("** class doesn't exist **")
         else:
-            dct = {'BaseModel': BaseModel}
-            mymodel = dct[model]()
+            d = {'BaseModel': BaseModel, 'User': User, 'City': City,
+                 'Amenity': Amenity, 'Place': Place, 'Review': Review}
+            mymodel = d[model]()
             print(mymodel.id)
             mymodel.save()
 
@@ -49,10 +71,11 @@ class HBNBCommand(cmd.Cmd):
             return
         args = arg.split(' ')
 
-        if args[0] not in HBNBCommand.class_list:
+        if args[0] not in HBNBCommand.cls_list:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
+        else:
             all_objs = storage.all()
             for key, value in all_objs.items():
                 obj_name = value.__class__.__name__
@@ -70,11 +93,12 @@ class HBNBCommand(cmd.Cmd):
             return
         args = arg.split(' ')
 
-        if args[0] not in HBNBCommand.class_list:
+        if args[0] not in HBNBCommand.cls_list:
             print("** class doesn't exist **")
 
         elif len(args) == 1:
             print("** instance id missing **")
+        else:
             all_objs = storage.all()
             for key, value in all_objs.items():
                 obj_name = value.__class__.__name__
@@ -93,8 +117,9 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split(' ')
 
         instance_list = []
-        if args[0] not in HBNBCommand.class_list:
+        if args[0] not in HBNBCommand.cls_list:
             print("** class doesn't exist **")
+        else:
             all_objs = storage.all()
             for key, value in all_objs.items():
                 obj_name = value.__class__.__name__
@@ -112,22 +137,23 @@ class HBNBCommand(cmd.Cmd):
 
         args = arg.split(' ')
 
-        if args[0] not in HBNBCommand.class_list:
+        if args[0] not in HBNBCommand.cls_list:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
-        elif len(args) == 2:
-            print("** attribute name missing **")
-        elif len(args) == 3:
-            print("** value missing **")
         else:
             all_objs = storage.all()
-            for key, value in all_onjs.items():
-                obj_name = value.__class__.name__
+            for key, value in all_objs.items():
+                obj_name = value.__class__.__name__
                 obj_id = value.id
                 if obj_name == args[0] and obj_id == args[1].strip('"'):
-                    setattr(value, args[2], args[3])
-                    storage.save()
+                    if len(args) == 2:
+                        print("** attribute name missing **")
+                    elif len(args) == 3:
+                        print("** value missing **")
+                    else:
+                        setattr(value, args[2], args[3])
+                        storage.save()
                     return
             print("** no instance found **")
 
