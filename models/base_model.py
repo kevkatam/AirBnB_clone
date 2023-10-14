@@ -22,14 +22,14 @@ class BaseModel:
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            self.updated_at = self.created_at 
+            self.updated_at = self.created_at
             storage.new(self)
 
     def __str__(self):
         '''String representation'''
-        
-        self.__dict__ = {k: v for (k, v) in self.__dict__.items() if (not v)is False}
-        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
+        d = {k: v for (k, v) in self.__dict__.items() if (not v) is False}
+
+        return f"[{self.__class__.__name__}] ({self.id}) {d}"
 
     def save(self):
         '''Update current time'''
