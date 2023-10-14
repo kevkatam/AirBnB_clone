@@ -119,11 +119,11 @@ class HBNBCommand(cmd.Cmd):
 
         args = arg.split(' ')
 
-        instance_list = []
         if args[0] not in HBNBCommand.cls_list:
             print("** class doesn't exist **")
         else:
             all_objs = storage.all()
+            instance_list = []
             for key, value in all_objs.items():
                 obj_name = value.__class__.__name__
                 if obj_name == args[0]:
