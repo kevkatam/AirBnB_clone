@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 '''The base module'''
 
-
 import uuid
 from datetime import datetime
 from models import storage
+
 
 class BaseModel:
     '''The base model'''
@@ -18,7 +18,7 @@ class BaseModel:
                     continue
                 if key == 'created_at' or key == 'updated_at':
                     value = datetime.fromisoformat(value)
-                
+
                 setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
@@ -39,7 +39,7 @@ class BaseModel:
 
     def to_dict(self):
         '''Returns a dictionary'''
-        
+
         dictionary = self.__dict__
         dictionary['__class__'] = self.__class__.__name__
         dictionary['created_at'] = self.created_at.isoformat()

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-unittest for the module review 
+unittest for the module review
 """
 import unittest
 from models.review import Review
