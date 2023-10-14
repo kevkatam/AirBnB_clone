@@ -29,7 +29,7 @@ class BaseModel:
         '''String representation'''
         d = {k: v for (k, v) in self.__dict__.items() if (not v) is False}
 
-        return ("[{}] ({}) {}".format(self.__class__.name, self.id, d))
+        return ("[{}] ({}) {}".format(self.__class__.__name__, self.id, d))
 
     def save(self):
         '''Update current time'''
