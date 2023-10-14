@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, arg):
         """ modifies the parsed argument """
-        if '.' in arg and '(' and ')' in arg:
+        if '.' in arg and '(' in arg and ')' in arg:
             c = arg.split('.')
             cmd = c[1].split('(')
             args = cmd[1].split(')')
