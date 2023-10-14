@@ -27,7 +27,8 @@ class BaseModel:
 
     def __str__(self):
         '''String representation'''
-
+        
+        self.__dict__ = {k: v for (k, v) in self.__dict__.items() if (not v)is False}
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
