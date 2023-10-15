@@ -59,7 +59,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             d = {'BaseModel': BaseModel, 'User': User, 'City': City,
-                 'Amenity': Amenity, 'Place': Place, 'Review': Review}
+                 'Amenity': Amenity, 'Place': Place, 'Review': Review,
+                 'State': State}
             mymodel = d[model]()
             print(mymodel.id)
             mymodel.save()
