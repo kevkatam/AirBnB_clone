@@ -20,7 +20,7 @@ class FileStorage:
         '''Set object'''
         class_name = type(obj).__name__
         o_id = str(obj.id)
-        FileStorage.__objects[f"{class_name}.{o_id}"] = obj
+        FileStorage.__objects[f'{class_name}.{o_id}'] = obj
 
     def save(self):
         '''Serialize to JSON'''
