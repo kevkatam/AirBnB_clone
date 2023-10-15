@@ -115,7 +115,9 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """ Prints all string representation of all instances based or not on
         the class name """
-
+        if not arg:
+            print("** class name missing **")
+            return
         args = arg.split(' ')
 
         if args[0] not in HBNBCommand.cls_list:
