@@ -27,7 +27,9 @@ class BaseModel:
 
     def __str__(self):
         '''String representation'''
-        return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
+        class_name = self.__class__.__name__
+        d = {k: v for (k, v) in self.__dict__.items() if (not v) is False}
+        return f'[{class_name}] ({self.id}) {d}'
 
     def save(self):
         '''Update current time'''
