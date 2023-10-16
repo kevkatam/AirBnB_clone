@@ -1,8 +1,8 @@
-#AirBnB_clone
+# AirBnB_clone
 
-##Description
+## Description
 - This the first step towards building a full web application: AirBnB clone.
 - We are creating a basic console to manage the objects of the whole project
 
-##Description of The Command Line Interpreter
+## Description of The Command Line Interpreter
 
