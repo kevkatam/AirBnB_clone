@@ -58,7 +58,7 @@ ul.popover {
 	box-sizing: border-box;
 	top: 0;
 	display: none;
-	margin-top 70px;
+	margin-top: 70px;
 	position: absolute;
 	z-index: 1;
 }
